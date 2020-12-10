@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReVision"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="1000">
+    <Grid x:Name="myGrid">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" x:Name="SubjectColumn"/>
+            <ColumnDefinition Width="400" x:Name="QuestionColumn"/>
+            <ColumnDefinition Width="*" x:Name="AnswerColumn"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Subject Selection -->
+        <StackPanel Grid.Column="0" x:Name="SubjectSP"></StackPanel>
+        
+        <!-- Question Selection -->
+        <StackPanel Grid.Column="1" x:Name="QuestionSP"></StackPanel>
+
+        <!-- Answer Selection -->
+        <StackPanel Grid.Column="2" x:Name="AnswerSP">
+            
+        </StackPanel>
+
 
     </Grid>
 </Window>
