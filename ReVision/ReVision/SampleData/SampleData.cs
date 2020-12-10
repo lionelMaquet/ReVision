@@ -21,7 +21,7 @@ namespace ReVision
 
             generalQAs.Add(
                 new QAModel(
-                    "What is my age ?",
+                    "What is my age ? azebiazebaz eiazgebvjaz eazbeza eba abzjveiaz ezave azjev azieavzoeaz",
                     new Proposition("25", "oui"),
                     new List<Proposition>()
                     {
@@ -33,7 +33,7 @@ namespace ReVision
 
             generalQAs.Add(
                 new QAModel(
-                    "Where do I love ?",
+                    "Where do I live ?",
                     new Proposition("Juprelle", "oui"),
                     new List<Proposition>()
                     {

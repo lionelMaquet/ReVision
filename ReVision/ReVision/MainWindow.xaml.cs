@@ -29,6 +29,7 @@ namespace ReVision
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Data = new SampleData();
 
             // adds a subject button for all subjects in dataset
@@ -36,6 +37,7 @@ namespace ReVision
             {
                 Button newSubjectButton = new Button();
                 newSubjectButton.Content = sub.name;
+                newSubjectButton.Style = this.FindResource("ButtonStyle") as Style;
                 newSubjectButton.Click += subjectButtonClicked;
                 SubjectSP.Children.Add(newSubjectButton);
             }
@@ -55,6 +57,7 @@ namespace ReVision
             {
                 Button questionButton = new Button();
                 questionButton.Content = qa.question;
+                questionButton.Style = this.FindResource("ButtonStyle") as Style;
                 questionButton.Click += questionButtonClicked;
                 QuestionSP.Children.Add(questionButton);
 
@@ -80,6 +83,7 @@ namespace ReVision
             foreach(Proposition prop in allProps)
             {
                 Button propButton = new Button();
+                propButton.Style = this.FindResource("ButtonStyle") as Style;
                 propButton.Content = prop.proposition;
                 propButton.Click += answerButtonClicked;
                 AnswerSP.Children.Add(propButton);
