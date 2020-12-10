@@ -1,4 +1,5 @@
-﻿using ReVision.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using ReVision.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,24 @@ namespace ReVision
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly RevisionContext _context =
+            new RevisionContext();
+
         SampleData Data;
         Subject currentSubject;
         QAModel currentQuestion;
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // this is for demo purposes only, to make it easier
+            // to get up and running
+            _context.Database.EnsureCreated();
+
+            // load the entities into EF Core
+            _context.Subjects.Load();
+            
+
+        }
 
         public MainWindow()
         {
@@ -41,6 +57,8 @@ namespace ReVision
                 newSubjectButton.Click += subjectButtonClicked;
                 SubjectSP.Children.Add(newSubjectButton);
             }
+
+            
         }
 
         private void subjectButtonClicked(object sender, RoutedEventArgs e)
@@ -48,12 +66,12 @@ namespace ReVision
             QuestionSP.Children.Clear();
 
             var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
-            
+
             Subject selectedSub = Data.allSubjects.Find(x => x.name == subjectTitleOfButtonClicked);
             currentSubject = selectedSub;
 
             // adds the questions for all questions in current selected subject
-            foreach ( QAModel qa in selectedSub.qas)
+            foreach (QAModel qa in selectedSub.qas)
             {
                 Button questionButton = new Button();
                 questionButton.Content = qa.question;
@@ -62,6 +80,10 @@ namespace ReVision
                 QuestionSP.Children.Add(questionButton);
 
             }
+
+            _context.Subjects.Add(Data.allSubjects[0]);
+            _context.SaveChanges();
+           
         }
 
         private void questionButtonClicked(object sender, RoutedEventArgs e)
@@ -73,7 +95,7 @@ namespace ReVision
             QAModel selectedQuestion = currentSubject.qas.Find(x => x.question == questionTitleOfButtonClicked);
             currentQuestion = selectedQuestion;
 
-            List<Proposition> allProps = new List<Proposition>(selectedQuestion._falsePropositions);
+            List<Proposition> allProps = new List<Proposition>(selectedQuestion.falsePropositions);
             
             // insert true answer in random position
             int randomPos = new Random().Next(0, allProps.Count + 1);

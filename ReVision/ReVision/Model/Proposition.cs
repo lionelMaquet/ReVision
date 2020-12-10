@@ -6,8 +6,10 @@ namespace ReVision.Model
 {
     class Proposition
     {
-        private string _proposition;
-        private string _explanation;
+
+        public int PropositionId { get; set; }
+        public string proposition { get; set; }
+        public string explanation { get; set; }
 
         public Proposition(string prop, string exp)
         {
@@ -15,30 +17,7 @@ namespace ReVision.Model
             this.explanation = exp;
         }
 
-        internal string proposition
-        {
-            get
-            {
-                return _proposition;
-            }
-
-            set
-            {
-                _proposition = value;
-            }
-        }
-
-        internal string explanation
-        {
-            get
-            {
-                return _explanation;
-            }
-
-            set
-            {
-                _explanation = value;
-            }
-        }
+        
+        
     }
 }

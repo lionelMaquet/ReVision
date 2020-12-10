@@ -6,44 +6,20 @@ namespace ReVision.Model
 {
     class QAModel
     {
-        private string _question;
-        private Proposition _answer;
-        internal List<Proposition> _falsePropositions = new List<Proposition>();
+
+        virtual public List<Proposition> falsePropositions { get; set; }
+        /// <summary>
+        /// The question string
+        /// </summary>
+        virtual public string question { get; set; }
+        virtual public Proposition answer { get; set; }
 
         public QAModel(string quest, Proposition trueAnswer, List<Proposition> falseAnswers)
         {
             question = quest;
             answer = trueAnswer;
-            _falsePropositions = falseAnswers;
+            falsePropositions = new List<Proposition>(falseAnswers);
         }
-
-        /// <summary>
-        /// The question string
-        /// </summary>
-        internal string question
-        {
-            get
-            {
-                return _question;
-            }
-            set
-            {
-                _question = value;
-            }
-        }
-
-        internal Proposition answer
-        {
-            get
-            {
-                return _answer;
-            }
-            set {
-                _answer = value;
-            }
-        }
-
-        
 
     }
 }
