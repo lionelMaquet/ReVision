@@ -23,12 +23,15 @@ namespace ReVision
     public partial class MainWindow : Window
     {
         SampleData Data;
-        string currentSubject;
+        Subject currentSubject;
+        QAModel currentQuestion;
 
         public MainWindow()
         {
             InitializeComponent();
             Data = new SampleData();
+
+            // adds a subject button for all subjects in dataset
             foreach (Subject sub in Data.allSubjects)
             {
                 Button newSubjectButton = new Button();
@@ -43,10 +46,12 @@ namespace ReVision
             QuestionSP.Children.Clear();
 
             var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
-            currentSubject = subjectTitleOfButtonClicked;
-            Subject selectedSub = Data.allSubjects.Find(x => x.name == currentSubject);
+            
+            Subject selectedSub = Data.allSubjects.Find(x => x.name == subjectTitleOfButtonClicked);
+            currentSubject = selectedSub;
 
-            foreach( QAModel qa in selectedSub.qas)
+            // adds the questions for all questions in current selected subject
+            foreach ( QAModel qa in selectedSub.qas)
             {
                 Button questionButton = new Button();
                 questionButton.Content = qa.question;
@@ -58,24 +63,41 @@ namespace ReVision
 
         private void questionButtonClicked(object sender, RoutedEventArgs e)
         {
+            
             AnswerSP.Children.Clear();
-            Subject selectedSub = Data.allSubjects.Find(x => x.name == currentSubject);
+            
             var questionTitleOfButtonClicked = (e.Source as Button).Content.ToString();
-            QAModel selectedQuestion = selectedSub.qas.Find(x => x.question == questionTitleOfButtonClicked);
-
+            QAModel selectedQuestion = currentSubject.qas.Find(x => x.question == questionTitleOfButtonClicked);
+            currentQuestion = selectedQuestion;
 
             List<Proposition> allProps = new List<Proposition>(selectedQuestion._falsePropositions);
-
-            int randomPos = new Random().Next(0, 3);
+            
+            // insert true answer in random position
+            int randomPos = new Random().Next(0, allProps.Count + 1);
             allProps.Insert(randomPos, selectedQuestion.answer);
 
+            // adds the answers for the current selected question
             foreach(Proposition prop in allProps)
             {
                 Button propButton = new Button();
                 propButton.Content = prop.proposition;
+                propButton.Click += answerButtonClicked;
                 AnswerSP.Children.Add(propButton);
             }
 
+        }
+
+        private void answerButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var selectedAnswer = (e.Source as Button).Content.ToString();
+            string trueAnswer = currentQuestion.answer.proposition;
+            if (selectedAnswer == trueAnswer)
+            {
+                SelectedAnswerResult.Text = "correct !";
+            } else
+            {
+                SelectedAnswerResult.Text = "INCORRECT !";
+            }
         }
     }
 }
