@@ -16,9 +16,11 @@ namespace ReVision
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(
-                "Data Source=Revision.db");
+            optionsBuilder.UseSqlite("Data Source=Revision.db");
+           
+
             base.OnConfiguring(optionsBuilder);
         }
+
     }
 }

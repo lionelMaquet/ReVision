@@ -23,8 +23,7 @@ namespace ReVision
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly RevisionContext _context =
-            new RevisionContext();
+        private readonly RevisionContext _context = new RevisionContext();
 
         SampleData Data;
         Subject currentSubject;
@@ -48,6 +47,9 @@ namespace ReVision
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Data = new SampleData();
 
+            
+            
+
             // adds a subject button for all subjects in dataset
             foreach (Subject sub in Data.allSubjects)
             {
@@ -63,6 +65,11 @@ namespace ReVision
 
         private void subjectButtonClicked(object sender, RoutedEventArgs e)
         {
+            _context.Add<Subject>(Data.allSubjects[0]);
+            _context.SaveChanges();
+            Console.WriteLine(_context.Subjects.OrderBy(b => b.SubjectId).First().Name);
+
+
             QuestionSP.Children.Clear();
 
             var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
