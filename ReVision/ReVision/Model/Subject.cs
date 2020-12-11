@@ -11,20 +11,27 @@ namespace ReVision.Model
         /// <summary>
         /// Name of the subject (IE : History, math, ...)
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// All questions and answers in the subject
         /// </summary>
-        virtual public List<QAModel> qas { get; set; }
+        virtual public List<QAModel> Qas { get; set; }
+
+        public Subject()
+        {
+        }
+
+
 
         public Subject(string name, List<QAModel> qas)
         {
-            this.name = name;
-            this.qas = qas;
+            this.Name = name;
+            this.Qas = qas;
+
         }
 
 
     }
 
-    
+
 }

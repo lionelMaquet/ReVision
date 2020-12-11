@@ -4,7 +4,6 @@ C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcor
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcoreapp3.1\ReVision.runtimeconfig.dev.json
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcoreapp3.1\ReVision.dll
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcoreapp3.1\ReVision.pdb
-C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csprojAssemblyReference.cache
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision_MarkupCompile.cache
@@ -13,7 +12,6 @@ C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcor
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.g.resources
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.AssemblyInfoInputs.cache
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.AssemblyInfo.cs
-C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csproj.CoreCompileInputs.cache
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.dll
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.pdb
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.genruntimeconfig.cache
@@ -57,3 +55,6 @@ C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcor
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csproj.CopyComplete
+C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csproj.CoreCompileInputs.cache
+C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csprojAssemblyReference.cache

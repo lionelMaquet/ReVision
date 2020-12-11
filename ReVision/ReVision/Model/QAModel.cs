@@ -7,18 +7,26 @@ namespace ReVision.Model
     class QAModel
     {
 
-        virtual public List<Proposition> falsePropositions { get; set; }
+        virtual public int QAModelId { get; set; }
+        virtual public List<Proposition> FalsePropositions { get; set; }
         /// <summary>
         /// The question string
         /// </summary>
-        virtual public string question { get; set; }
-        virtual public Proposition answer { get; set; }
+        virtual public string Question { get; set; }
+        virtual public Proposition Answer { get; set; }
+
+        public QAModel()
+        {
+
+        }
 
         public QAModel(string quest, Proposition trueAnswer, List<Proposition> falseAnswers)
         {
-            question = quest;
-            answer = trueAnswer;
-            falsePropositions = new List<Proposition>(falseAnswers);
+            
+            Question = quest;
+            Answer = trueAnswer;
+            FalsePropositions = new List<Proposition>(falseAnswers);
+            
         }
 
     }

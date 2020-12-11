@@ -4,20 +4,22 @@ using System.Text;
 
 namespace ReVision.Model
 {
-    class Proposition
+    public class Proposition
     {
 
         public int PropositionId { get; set; }
-        public string proposition { get; set; }
-        public string explanation { get; set; }
+        public string PropositionTitle { get; set; }
+        public string Explanation { get; set; }
 
         public Proposition(string prop, string exp)
         {
-            this.proposition = prop;
-            this.explanation = exp;
+            this.PropositionTitle = prop;
+            this.Explanation = exp;
         }
 
-        
-        
+        public Proposition()
+        {
+            
+        }
     }
 }

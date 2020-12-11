@@ -52,7 +52,7 @@ namespace ReVision
             foreach (Subject sub in Data.allSubjects)
             {
                 Button newSubjectButton = new Button();
-                newSubjectButton.Content = sub.name;
+                newSubjectButton.Content = sub.Name;
                 newSubjectButton.Style = this.FindResource("ButtonStyle") as Style;
                 newSubjectButton.Click += subjectButtonClicked;
                 SubjectSP.Children.Add(newSubjectButton);
@@ -67,14 +67,14 @@ namespace ReVision
 
             var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
 
-            Subject selectedSub = Data.allSubjects.Find(x => x.name == subjectTitleOfButtonClicked);
+            Subject selectedSub = Data.allSubjects.Find(x => x.Name == subjectTitleOfButtonClicked);
             currentSubject = selectedSub;
 
             // adds the questions for all questions in current selected subject
-            foreach (QAModel qa in selectedSub.qas)
+            foreach (QAModel qa in selectedSub.Qas)
             {
                 Button questionButton = new Button();
-                questionButton.Content = qa.question;
+                questionButton.Content = qa.Question;
                 questionButton.Style = this.FindResource("ButtonStyle") as Style;
                 questionButton.Click += questionButtonClicked;
                 QuestionSP.Children.Add(questionButton);
@@ -92,21 +92,21 @@ namespace ReVision
             AnswerSP.Children.Clear();
             
             var questionTitleOfButtonClicked = (e.Source as Button).Content.ToString();
-            QAModel selectedQuestion = currentSubject.qas.Find(x => x.question == questionTitleOfButtonClicked);
+            QAModel selectedQuestion = currentSubject.Qas.Find(x => x.Question == questionTitleOfButtonClicked);
             currentQuestion = selectedQuestion;
 
-            List<Proposition> allProps = new List<Proposition>(selectedQuestion.falsePropositions);
+            List<Proposition> allProps = new List<Proposition>(selectedQuestion.FalsePropositions);
             
             // insert true answer in random position
             int randomPos = new Random().Next(0, allProps.Count + 1);
-            allProps.Insert(randomPos, selectedQuestion.answer);
+            allProps.Insert(randomPos, selectedQuestion.Answer);
 
             // adds the answers for the current selected question
             foreach(Proposition prop in allProps)
             {
                 Button propButton = new Button();
                 propButton.Style = this.FindResource("ButtonStyle") as Style;
-                propButton.Content = prop.proposition;
+                propButton.Content = prop.PropositionTitle;
                 propButton.Click += answerButtonClicked;
                 AnswerSP.Children.Add(propButton);
             }
@@ -116,7 +116,7 @@ namespace ReVision
         private void answerButtonClicked(object sender, RoutedEventArgs e)
         {
             var selectedAnswer = (e.Source as Button).Content.ToString();
-            string trueAnswer = currentQuestion.answer.proposition;
+            string trueAnswer = currentQuestion.Answer.PropositionTitle;
             if (selectedAnswer == trueAnswer)
             {
                 SelectedAnswerResult.Text = "correct !";

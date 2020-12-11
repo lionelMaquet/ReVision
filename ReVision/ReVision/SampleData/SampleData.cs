@@ -18,7 +18,7 @@ namespace ReVision
             
 
 
-
+            
             generalQAs.Add(
                 new QAModel(
                     "What is my age ? azebiazebaz eiazgebvjaz eazbeza eba abzjveiaz ezave azjev azieavzoeaz",
@@ -64,7 +64,7 @@ namespace ReVision
                 general
             };
 
-
+            
         }
 
 
