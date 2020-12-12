@@ -42,7 +42,6 @@ namespace ReVision
             // Get all subjects from json db file.
             AllSubjects = JsonRevisionHelper.ReadSubjects();
             AddSubjectButtonForEachSubject();
-
         }
 
         #region Functions relative to UI of ADDING elements in DB (subjets, questions, answers)
@@ -110,22 +109,6 @@ namespace ReVision
 
         }
 
-        private void AddOrModifyAnswer(object sender, RoutedEventArgs e)
-        {
-            Proposition newAnswer = new Proposition();
-            newAnswer.PropositionTitle = AddPropositionTextBox.Text;
-            currentQuestion.Answer = newAnswer;
-            RefreshData();
-        }
-
-        private void AddFalseAnswer(object sender, RoutedEventArgs e)
-        {
-            Proposition newFalseAnswer = new Proposition();
-            newFalseAnswer.PropositionTitle = AddPropositionTextBox.Text;
-            currentQuestion.FalsePropositions.Add(newFalseAnswer);
-            RefreshData();
-        }
-
         #endregion
 
         #region Functions relative to ADDING elements in DB (subjets, questions, answers)
@@ -149,6 +132,20 @@ namespace ReVision
             RefreshData();
             
 
+        }
+        private void AddOrModifyAnswer(object sender, RoutedEventArgs e)
+        {
+            Proposition newAnswer = new Proposition();
+            newAnswer.PropositionTitle = AddPropositionTextBox.Text;
+            currentQuestion.Answer = newAnswer;
+            RefreshData();
+        }
+        private void AddFalseAnswer(object sender, RoutedEventArgs e)
+        {
+            Proposition newFalseAnswer = new Proposition();
+            newFalseAnswer.PropositionTitle = AddPropositionTextBox.Text;
+            currentQuestion.FalsePropositions.Add(newFalseAnswer);
+            RefreshData();
         }
 
         #endregion
@@ -216,7 +213,7 @@ namespace ReVision
             var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
             Subject selectedSub = AllSubjects.Find(x => x.Name == subjectTitleOfButtonClicked);
             currentSubject = selectedSub;
-            AddQuestionButtonForEachQuestion();
+            RefreshUi();
         }
 
         private void questionButtonClicked(object sender, RoutedEventArgs e)
@@ -224,7 +221,7 @@ namespace ReVision
             var questionTitleOfButtonClicked = (e.Source as Button).Content.ToString();
             QAModel selectedQuestion = currentSubject.Qas.Find(x => x.Question == questionTitleOfButtonClicked);
             currentQuestion = selectedQuestion;
-            AddAnswerButtonForEachAnswer();
+            RefreshUi();
         }
 
         private void answerButtonClicked(object sender, RoutedEventArgs e)
