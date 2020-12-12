@@ -31,6 +31,7 @@ namespace ReVision
 
         TextBox AddSubjectTextBox;
         TextBox AddQuestionTextBox;
+        TextBox AddPropositionTextBox;
 
 
         public MainWindow()
@@ -82,6 +83,47 @@ namespace ReVision
             addQuestionSP.Children.Add(addQuestionButton);
 
             QuestionSP.Children.Add(addQuestionSP);
+        }
+
+        public void AddNewAnswerElements()
+        {
+            StackPanel AddPropositionSP = new StackPanel();
+            AddPropositionSP.Orientation = Orientation.Horizontal;
+
+            AddPropositionTextBox = new TextBox();
+            AddPropositionTextBox.Name = "NewPropositionTitle";
+            AddPropositionTextBox.Width = 200;
+
+            Button addFalseAnswerButton = new Button();
+            addFalseAnswerButton.Content = "Add false answer";
+            addFalseAnswerButton.Click += AddFalseAnswer;
+
+            Button addOrModifyAnswerButton = new Button();
+            addOrModifyAnswerButton.Content = "Add or modify answer";
+            addOrModifyAnswerButton.Click += AddOrModifyAnswer;
+
+            AddPropositionSP.Children.Add(AddPropositionTextBox);
+            AddPropositionSP.Children.Add(addFalseAnswerButton);
+            AddPropositionSP.Children.Add(addOrModifyAnswerButton);
+
+            AnswerSP.Children.Add(AddPropositionSP);
+
+        }
+
+        private void AddOrModifyAnswer(object sender, RoutedEventArgs e)
+        {
+            Proposition newAnswer = new Proposition();
+            newAnswer.PropositionTitle = AddPropositionTextBox.Text;
+            currentQuestion.Answer = newAnswer;
+            RefreshData();
+        }
+
+        private void AddFalseAnswer(object sender, RoutedEventArgs e)
+        {
+            Proposition newFalseAnswer = new Proposition();
+            newFalseAnswer.PropositionTitle = AddPropositionTextBox.Text;
+            currentQuestion.FalsePropositions.Add(newFalseAnswer);
+            RefreshData();
         }
 
         #endregion
@@ -162,6 +204,8 @@ namespace ReVision
                 propButton.Click += answerButtonClicked;
                 AnswerSP.Children.Add(propButton);
             }
+
+            AddNewAnswerElements();
         }
 
         #endregion
