@@ -7,7 +7,7 @@ namespace ReVision.Model
     public class Proposition
     {
 
-        public int PropositionId { get; set; }
+        
         public string PropositionTitle { get; set; }
         public string Explanation { get; set; }
 
@@ -19,7 +19,8 @@ namespace ReVision.Model
 
         public Proposition()
         {
-            
+            PropositionTitle = "";
+            Explanation = "";
         }
     }
 }

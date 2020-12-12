@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6AxNrTO6Ua0BdPmNtCqfK9RB/8QuX2qDm8g7QYtYVnVUZ7tJKXfgk5aS77Od/AaUxT65QdWDdK9wyfZ1JQ365Q==",
+  "dgSpecHash": "dVg6p30lyBrKtpwGjzaCcS5Nd4k6F0kH4tITO7zsbno+u4Gow8hi+0ydR9OiSwDK5h2TqV1cIy5fdQczCdxlsw==",
   "success": true,
   "projectFilePath": "C:\\Users\\lione\\Desktop\\Side Projects\\ReVision\\ReVision\\ReVision\\ReVision.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\lione\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

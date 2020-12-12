@@ -1,4 +1,5 @@
 ﻿
+using ReVision.Helper;
 using ReVision.Model;
 using System;
 using System.Collections.Generic;
@@ -23,25 +24,100 @@ namespace ReVision
     /// </summary>
     public partial class MainWindow : Window
     {
-        
 
-        SampleData Data;
         Subject currentSubject;
         QAModel currentQuestion;
+        List<Subject> AllSubjects;
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        TextBox AddSubjectTextBox;
+        TextBox AddQuestionTextBox;
+
 
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            Data = new SampleData();
 
-            // adds a subject button for all subjects in dataset
-            foreach (Subject sub in Data.allSubjects)
+            // Get all subjects from json db file.
+            AllSubjects = JsonRevisionHelper.ReadSubjects();
+            AddSubjectButtonForEachSubject();
+
+        }
+
+        #region Functions relative to UI of ADDING elements in DB (subjets, questions, answers)
+        public void AddNewSubjectElements()
+        {
+            // adds the textbox and button for adding subject
+            StackPanel addSubjectSP = new StackPanel();
+            addSubjectSP.Orientation = Orientation.Horizontal;
+
+            AddSubjectTextBox = new TextBox();
+            AddSubjectTextBox.Name = "NewSubjectTitle";
+            AddSubjectTextBox.Width = 60;
+
+            Button addSubjectButton = new Button();
+            addSubjectButton.Content = "Add Subject";
+            addSubjectButton.Click += AddSubject;
+            addSubjectSP.Children.Add(AddSubjectTextBox);
+            addSubjectSP.Children.Add(addSubjectButton);
+
+            SubjectSP.Children.Add(addSubjectSP);
+        }
+
+        public void AddNewQuestionElements()
+        {
+            // adds the textbox and button for adding question
+            StackPanel addQuestionSP = new StackPanel();
+            addQuestionSP.Orientation = Orientation.Horizontal;
+
+            AddQuestionTextBox = new TextBox();
+            AddQuestionTextBox.Name = "NewQuestionTitle";
+            AddQuestionTextBox.Width = 60;
+
+            Button addQuestionButton = new Button();
+            addQuestionButton.Content = "Add Question";
+            addQuestionButton.Click += AddQuestion;
+
+            addQuestionSP.Children.Add(AddQuestionTextBox);
+            addQuestionSP.Children.Add(addQuestionButton);
+
+            QuestionSP.Children.Add(addQuestionSP);
+        }
+
+        #endregion
+
+        #region Functions relative to ADDING elements in DB (subjets, questions, answers)
+
+        private void AddSubject(object sender, RoutedEventArgs e)
+        {
+            Subject newSubject = new Subject()
+            {
+                Name = AddSubjectTextBox.Text
+            };
+
+            AllSubjects.Add(newSubject);
+            RefreshData();
+
+        }
+        private void AddQuestion(object sender, RoutedEventArgs e)
+        {
+            QAModel newQuestion = new QAModel();
+            newQuestion.Question = AddQuestionTextBox.Text;
+            currentSubject.Qas.Add(newQuestion);
+            RefreshData();
+            AddQuestionButtonForEachQuestion();
+
+        }
+
+        #endregion
+
+        #region Functions relative to UI of selecting elements (subjets, questions, answers)
+
+        public void AddSubjectButtonForEachSubject()
+        {
+            SubjectSP.Children.Clear();
+
+            foreach (Subject sub in AllSubjects)
             {
                 Button newSubjectButton = new Button();
                 newSubjectButton.Content = sub.Name;
@@ -50,20 +126,12 @@ namespace ReVision
                 SubjectSP.Children.Add(newSubjectButton);
             }
 
-            
+            AddNewSubjectElements();
         }
-
-        private void subjectButtonClicked(object sender, RoutedEventArgs e)
+        public void AddQuestionButtonForEachQuestion()
         {
             QuestionSP.Children.Clear();
-
-            var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
-
-            Subject selectedSub = Data.allSubjects.Find(x => x.Name == subjectTitleOfButtonClicked);
-            currentSubject = selectedSub;
-
-            // adds the questions for all questions in current selected subject
-            foreach (QAModel qa in selectedSub.Qas)
+            foreach (QAModel qa in currentSubject.Qas)
             {
                 Button questionButton = new Button();
                 questionButton.Content = qa.Question;
@@ -72,28 +140,21 @@ namespace ReVision
                 QuestionSP.Children.Add(questionButton);
 
             }
+            AddNewQuestionElements();
 
-            
-           
         }
-
-        private void questionButtonClicked(object sender, RoutedEventArgs e)
+        public void AddAnswerButtonForEachAnswer()
         {
-            
             AnswerSP.Children.Clear();
-            
-            var questionTitleOfButtonClicked = (e.Source as Button).Content.ToString();
-            QAModel selectedQuestion = currentSubject.Qas.Find(x => x.Question == questionTitleOfButtonClicked);
-            currentQuestion = selectedQuestion;
 
-            List<Proposition> allProps = new List<Proposition>(selectedQuestion.FalsePropositions);
-            
+            List<Proposition> allProps = new List<Proposition>(currentQuestion.FalsePropositions);
+
             // insert true answer in random position
             int randomPos = new Random().Next(0, allProps.Count + 1);
-            allProps.Insert(randomPos, selectedQuestion.Answer);
+            allProps.Insert(randomPos, currentQuestion.Answer);
 
             // adds the answers for the current selected question
-            foreach(Proposition prop in allProps)
+            foreach (Proposition prop in allProps)
             {
                 Button propButton = new Button();
                 propButton.Style = this.FindResource("ButtonStyle") as Style;
@@ -101,7 +162,25 @@ namespace ReVision
                 propButton.Click += answerButtonClicked;
                 AnswerSP.Children.Add(propButton);
             }
+        }
 
+        #endregion
+
+        #region Functions triggered when selection buttons clicked
+        private void subjectButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
+            Subject selectedSub = AllSubjects.Find(x => x.Name == subjectTitleOfButtonClicked);
+            currentSubject = selectedSub;
+            AddQuestionButtonForEachQuestion();
+        }
+
+        private void questionButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var questionTitleOfButtonClicked = (e.Source as Button).Content.ToString();
+            QAModel selectedQuestion = currentSubject.Qas.Find(x => x.Question == questionTitleOfButtonClicked);
+            currentQuestion = selectedQuestion;
+            AddAnswerButtonForEachAnswer();
         }
 
         private void answerButtonClicked(object sender, RoutedEventArgs e)
@@ -111,10 +190,19 @@ namespace ReVision
             if (selectedAnswer == trueAnswer)
             {
                 SelectedAnswerResult.Text = "correct !";
-            } else
+            }
+            else
             {
                 SelectedAnswerResult.Text = "INCORRECT !";
             }
+
+        }
+
+        #endregion
+        private void RefreshData()
+        {
+            AllSubjects = JsonRevisionHelper.RewriteAndReload(AllSubjects);
+            AddSubjectButtonForEachSubject();
         }
     }
 }

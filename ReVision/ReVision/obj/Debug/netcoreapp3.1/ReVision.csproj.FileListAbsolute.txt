@@ -17,3 +17,5 @@ C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcor
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.genruntimeconfig.cache
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csproj.CoreCompileInputs.cache
 C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csprojAssemblyReference.cache
+C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\lione\Desktop\Side Projects\ReVision\ReVision\ReVision\obj\Debug\netcoreapp3.1\ReVision.csproj.CopyComplete

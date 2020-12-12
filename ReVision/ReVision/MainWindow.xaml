@@ -55,6 +55,16 @@
         <StackPanel Grid.Column="2" Grid.Row="1" x:Name="AnswerSP"></StackPanel>
 
         <TextBox x:Name="SelectedAnswerResult" Grid.Column="2" Grid.Row="3"></TextBox>
+        
+        
+        <!-- Adding subject -->
+        <!--
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
+            <TextBox x:Name="NewSubjectTitle" IsReadOnly="False" >sdfsdf</TextBox>
+            <Button x:Name="AddSubject" Content="Add Subject"></Button>
+        </StackPanel>
+        -->
+        
 
 
     </Grid>

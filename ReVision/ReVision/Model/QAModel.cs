@@ -7,8 +7,8 @@ namespace ReVision.Model
     class QAModel
     {
 
-        virtual public int QAModelId { get; set; }
-        virtual public List<Proposition> FalsePropositions { get; set; }
+        
+        public List<Proposition> FalsePropositions { get; set; }
         /// <summary>
         /// The question string
         /// </summary>
@@ -17,7 +17,9 @@ namespace ReVision.Model
 
         public QAModel()
         {
-
+            Question = "";
+            Answer = new Proposition();
+            FalsePropositions = new List<Proposition>();
         }
 
         public QAModel(string quest, Proposition trueAnswer, List<Proposition> falseAnswers)

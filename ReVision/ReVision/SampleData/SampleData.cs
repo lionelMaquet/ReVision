@@ -15,6 +15,7 @@ namespace ReVision
         {
             
             generalQAs = new List<QAModel>();
+            allSubjects = new List<Subject>();
             
 
 
@@ -59,10 +60,9 @@ namespace ReVision
             // You create a Subject and feed it the QAs you created
             general = new Subject("general", generalQAs);
 
-            allSubjects = new List<Subject>()
-            {
-                general
-            };
+            
+
+            allSubjects.Add(general) ;
 
             
         }
