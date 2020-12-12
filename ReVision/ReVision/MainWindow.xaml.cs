@@ -105,7 +105,7 @@ namespace ReVision
             newQuestion.Question = AddQuestionTextBox.Text;
             currentSubject.Qas.Add(newQuestion);
             RefreshData();
-            AddQuestionButtonForEachQuestion();
+            
 
         }
 
@@ -199,10 +199,29 @@ namespace ReVision
         }
 
         #endregion
+
+        #region Functions relative to refreshing data and ui
         private void RefreshData()
         {
             AllSubjects = JsonRevisionHelper.RewriteAndReload(AllSubjects);
             AddSubjectButtonForEachSubject();
+            RefreshUi();
+            
         }
+        private void RefreshUi()
+        {
+
+            if (currentSubject != null)
+            {
+                AddQuestionButtonForEachQuestion();
+            }
+
+            if (currentQuestion != null)
+            {
+                AddAnswerButtonForEachAnswer();
+            }
+        }
+
+        #endregion
     }
 }
