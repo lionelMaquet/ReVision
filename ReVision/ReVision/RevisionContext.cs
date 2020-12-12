@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
@@ -9,6 +10,8 @@ namespace ReVision
 {
     class RevisionContext : DbContext
     {
+
+
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<QAModel> QuestionAnswer { get; set; }
         public DbSet<Proposition> Proposition { get; set; }
@@ -16,8 +19,9 @@ namespace ReVision
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=Revision.db");
-           
+
+            
+            optionsBuilder.UseSqlite("Data Source=./Revision.db");
 
             base.OnConfiguring(optionsBuilder);
         }

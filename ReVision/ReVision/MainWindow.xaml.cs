@@ -38,7 +38,6 @@ namespace ReVision
             // load the entities into EF Core
             _context.Subjects.Load();
             
-
         }
 
         public MainWindow()
@@ -46,9 +45,6 @@ namespace ReVision
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Data = new SampleData();
-
-            
-            
 
             // adds a subject button for all subjects in dataset
             foreach (Subject sub in Data.allSubjects)
