@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using ReVision.Model;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace ReVision
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly RevisionContext _context = new RevisionContext();
+        
 
         SampleData Data;
         Subject currentSubject;
@@ -31,12 +31,6 @@ namespace ReVision
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // this is for demo purposes only, to make it easier
-            // to get up and running
-            _context.Database.EnsureCreated();
-
-            // load the entities into EF Core
-            _context.Subjects.Load();
             
         }
 
@@ -61,11 +55,6 @@ namespace ReVision
 
         private void subjectButtonClicked(object sender, RoutedEventArgs e)
         {
-            _context.Add<Subject>(Data.allSubjects[0]);
-            _context.SaveChanges();
-            Console.WriteLine(_context.Subjects.OrderBy(b => b.SubjectId).First().Name);
-
-
             QuestionSP.Children.Clear();
 
             var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
@@ -84,8 +73,7 @@ namespace ReVision
 
             }
 
-            _context.Subjects.Add(Data.allSubjects[0]);
-            _context.SaveChanges();
+            
            
         }
 
