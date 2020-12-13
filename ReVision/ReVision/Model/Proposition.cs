@@ -16,11 +16,12 @@ namespace ReVision.Model
             this.PropositionTitle = prop;
             this.Explanation = exp;
         }
-
+        
         public Proposition()
         {
             PropositionTitle = "";
             Explanation = "";
         }
+        
     }
 }

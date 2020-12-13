@@ -44,6 +44,11 @@ namespace ReVision
             AddSubjectButtonForEachSubject();
         }
 
+        public void MainWindow_Closing(object sender, EventArgs e)
+        {
+            JsonRevisionHelper.WriteSubjects(AllSubjects);
+        }
+
         #region Functions relative to UI of ADDING elements in DB (subjets, questions, answers)
         public void AddNewSubjectElements()
         {
@@ -121,7 +126,7 @@ namespace ReVision
             };
 
             AllSubjects.Add(newSubject);
-            RefreshData();
+            RefreshUi();
 
         }
         private void AddQuestion(object sender, RoutedEventArgs e)
@@ -129,8 +134,8 @@ namespace ReVision
             QAModel newQuestion = new QAModel();
             newQuestion.Question = AddQuestionTextBox.Text;
             currentSubject.Qas.Add(newQuestion);
-            RefreshData();
-            
+            RefreshUi();
+
 
         }
         private void AddOrModifyAnswer(object sender, RoutedEventArgs e)
@@ -138,14 +143,14 @@ namespace ReVision
             Proposition newAnswer = new Proposition();
             newAnswer.PropositionTitle = AddPropositionTextBox.Text;
             currentQuestion.Answer = newAnswer;
-            RefreshData();
+            RefreshUi();
         }
         private void AddFalseAnswer(object sender, RoutedEventArgs e)
         {
             Proposition newFalseAnswer = new Proposition();
             newFalseAnswer.PropositionTitle = AddPropositionTextBox.Text;
             currentQuestion.FalsePropositions.Add(newFalseAnswer);
-            RefreshData();
+            RefreshUi();
         }
 
         #endregion
@@ -154,7 +159,7 @@ namespace ReVision
 
         public void AddSubjectButtonForEachSubject()
         {
-            SubjectSP.Children.Clear();
+            
 
             foreach (Subject sub in AllSubjects)
             {
@@ -169,7 +174,7 @@ namespace ReVision
         }
         public void AddQuestionButtonForEachQuestion()
         {
-            QuestionSP.Children.Clear();
+            
             foreach (QAModel qa in currentSubject.Qas)
             {
                 Button questionButton = new Button();
@@ -184,7 +189,7 @@ namespace ReVision
         }
         public void AddAnswerButtonForEachAnswer()
         {
-            AnswerSP.Children.Clear();
+            
 
             List<Proposition> allProps = new List<Proposition>(currentQuestion.FalsePropositions);
 
@@ -213,6 +218,7 @@ namespace ReVision
             var subjectTitleOfButtonClicked = (e.Source as Button).Content.ToString();
             Subject selectedSub = AllSubjects.Find(x => x.Name == subjectTitleOfButtonClicked);
             currentSubject = selectedSub;
+            currentQuestion = null;
             RefreshUi();
         }
 
@@ -242,22 +248,21 @@ namespace ReVision
         #endregion
 
         #region Functions relative to refreshing data and ui
-        private void RefreshData()
-        {
-            AllSubjects = JsonRevisionHelper.RewriteAndReload(AllSubjects);
-            AddSubjectButtonForEachSubject();
-            RefreshUi();
-            
-        }
+        
         private void RefreshUi()
         {
+            SubjectSP.Children.Clear();
+            QuestionSP.Children.Clear();
+            AnswerSP.Children.Clear();
 
-            if (currentSubject != null)
+            AddSubjectButtonForEachSubject();
+
+            if (currentSubject != null )
             {
                 AddQuestionButtonForEachQuestion();
             }
 
-            if (currentQuestion != null)
+            if (currentQuestion != null )
             {
                 AddAnswerButtonForEachAnswer();
             }

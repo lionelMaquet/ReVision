@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReVision"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1000">
+        Title="MainWindow" Height="450" Width="1000"
+        Closing="MainWindow_Closing"
+        >
 
     <Window.Resources>
         <Style TargetType="Button" x:Key="ButtonStyle">
@@ -46,7 +48,8 @@
         <!-- Subject Selection -->
         <ScrollViewer Grid.Column="0" Grid.Row="1">
             <StackPanel x:Name="SubjectSP">
-                <Button Style="{StaticResource ButtonStyle}" Content="zerzer"></Button>
+                <!-- Uncomment to see the style -->
+                <!-- <Button Style="{StaticResource ButtonStyle}" Content="zerzer"></Button> -->
             </StackPanel>
         </ScrollViewer>
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ReVision.Model
 {
-    class QAModel
+    public class QAModel
     {
 
         
@@ -12,9 +12,10 @@ namespace ReVision.Model
         /// <summary>
         /// The question string
         /// </summary>
-        virtual public string Question { get; set; }
-        virtual public Proposition Answer { get; set; }
+        public string Question { get; set; }
+        public Proposition Answer { get; set; }
 
+        
         public QAModel()
         {
             Question = "";
@@ -30,6 +31,7 @@ namespace ReVision.Model
             FalsePropositions = new List<Proposition>(falseAnswers);
             
         }
+        
 
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ReVision.Model
 {
-    class Subject
+    public class Subject
     {
 
         /// <summary>
@@ -16,6 +16,7 @@ namespace ReVision.Model
         /// </summary>
         public List<QAModel> Qas { get; set; }
 
+        
         public Subject()
         {
             Name = "";
@@ -29,7 +30,7 @@ namespace ReVision.Model
             this.Qas = qas;
 
         }
-
+        
 
     }
 
